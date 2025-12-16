@@ -127,7 +127,14 @@ public class JogoDaVelha {
     }
 
     static boolean verificarEmpate() {
-        return false;
+        for (int i = 0; i < tabuleiro.length; i++){
+            for (int j = 0; j < tabuleiro.length; j++){
+                if (tabuleiro[i][j] == ' ' && !verificarVitoria()){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
-
 }
+
