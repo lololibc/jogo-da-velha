@@ -30,7 +30,7 @@ public class JogoDaVelha {
                 break;
             }
 
-            //alternarJogador();
+            alternarJogador();
         }
 
         teclado.close();
@@ -99,12 +99,31 @@ public class JogoDaVelha {
         }
     }
 
-    //static alternarJogador() {
-    
-    //}
+    static void alternarJogador() {
+        if (jogador == 'X') {
+            jogador = 'O';
+        } else {
+            jogador = 'X';
+        }
+    }
 
     static boolean verificarVitoria() {
-        return false;
+        for (int i = 0; i < tabuleiro.length; i++) {
+            if (tabuleiro[i][0] == jogador && tabuleiro[i][1] == jogador && tabuleiro[i][2] == jogador) {
+                return true;
+            }
+            if (tabuleiro[0][i] == jogador && tabuleiro[1][i] == jogador && tabuleiro[2][i] == jogador) {
+                return true;
+            }
+        }
+
+        if (tabuleiro[0][0] == jogador && tabuleiro[1][1] == jogador && tabuleiro[2][2] == jogador) {
+            return true;
+        } else if (tabuleiro[0][2] == jogador && tabuleiro[1][1] == jogador && tabuleiro[2][0] == jogador) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     static boolean verificarEmpate() {
