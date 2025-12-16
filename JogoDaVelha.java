@@ -57,7 +57,6 @@ public class JogoDaVelha {
         // Linhas do tabuleiro
         for (int i = 0; i < tabuleiro.length; i++) {
             System.out.print(i + ": ");
-
             for (int j = 0; j < tabuleiro[i].length; j++) {
                 System.out.print(tabuleiro[i][j]);
 
@@ -89,9 +88,12 @@ public class JogoDaVelha {
             System.out.print(" Digite a linha e a coluna da posição que você deseja realizar a sua jogada: ");
             int linha = teclado.nextInt();
             int coluna = teclado.nextInt();
-            if (linha > 2 || coluna > 2) {
+            if (linha > 2 || linha < 0 || coluna > 2 || coluna < 0) {
                 System.out.println("Você digitou uma linha e/ou coluna inválida, digite novamente mas com números entre 0 e 2!");
-            } else {
+            } else if (tabuleiro[linha][coluna] != ' '){
+                System.out.println("Essa posição já está ocupada, digite outra!");
+            }else {
+                tabuleiro[linha][coluna] = jogador;
                 digitoInvalido = false;
             }
         }
