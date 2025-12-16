@@ -84,19 +84,25 @@ public class JogoDaVelha {
 
     static void realizarJogada(Scanner teclado) {
         boolean digitoInvalido = true;
-        while (digitoInvalido) {
-            System.out.print(" Digite a linha e a coluna da posição que você deseja realizar a sua jogada: ");
-            int linha = teclado.nextInt();
-            int coluna = teclado.nextInt();
-            if (linha > 2 || linha < 0 || coluna > 2 || coluna < 0) {
-                System.out.println("Você digitou uma linha e/ou coluna inválida, digite novamente mas com números entre 0 e 2!");
-            } else if (tabuleiro[linha][coluna] != ' '){
-                System.out.println("Essa posição já está ocupada, digite outra!");
-            }else {
-                tabuleiro[linha][coluna] = jogador;
-                digitoInvalido = false;
+        if (jogador == 'X') {
+            while (digitoInvalido) {
+                System.out.print(" Digite a linha e a coluna da posição que você deseja realizar a sua jogada: ");
+                int linha = teclado.nextInt();
+                int coluna = teclado.nextInt();
+                if (linha > 2 || linha < 0 || coluna > 2 || coluna < 0) {
+                    System.out.println(
+                            "Você digitou uma linha e/ou coluna inválida, digite novamente mas com números entre 0 e 2!");
+                } else if (tabuleiro[linha][coluna] != ' ') {
+                    System.out.println("Essa posição já está ocupada, digite outra!");
+                } else {
+                    tabuleiro[linha][coluna] = jogador;
+                    digitoInvalido = false;
+                }
             }
+        } else {
+            jogadaComputador();
         }
+
     }
 
     static void alternarJogador() {
@@ -136,5 +142,17 @@ public class JogoDaVelha {
         }
         return true;
     }
-}
 
+    static void jogadaComputador() {
+        boolean jogadaValida = false;
+        System.out.println("Jogada do computador: ");
+        while (!jogadaValida) {
+            int linha = (int) (Math.random() * 3); // O (int) é necessário para converter o double em int pois Math.random() retorna um double.
+            int coluna = (int) (Math.random() * 3);// O math.random() gera um numero aleatorio entre 0 e 1, o * 3 multiplica esse numero por 3 para que ele possa ser 0, 1 ou 2.
+            if (tabuleiro[linha][coluna] == ' ') {
+                tabuleiro[linha][coluna] = jogador;
+                jogadaValida = true;
+            }
+        }
+    }
+}
